@@ -10,7 +10,12 @@ const SignaturesExt = () => {
   const title = t('seo:page.signatures.title')
   const description = t('seo:page.signatures.description')
   const {query} = useRouter()
-  const message = JSON.parse(Buffer.from(query.data, 'base64').toString())
+  let message = {filled: false}
+  if (query) {
+    if (query.data) {
+      message = JSON.parse(Buffer.from(query.data, 'base64').toString())
+    }
+  }
   return (
     <>
       <NextSeo title={title} description={description} />
@@ -21,7 +26,7 @@ const SignaturesExt = () => {
         >
           <DefaultHeader align="center">{t('heading')}</DefaultHeader>
         </Section>
-        <SigTab iMessageContent={message}/>
+        <SigTab iMessageContent={message} />
       </MainLayout>
     </>
   )
