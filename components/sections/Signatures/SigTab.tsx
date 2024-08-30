@@ -18,7 +18,7 @@ const StyledContainer = styled.div`
   max-width: 900px;
 `
 
-const SigTab = () => {
+const SigTab = ({iMessageContent}) => {
   const { t } = useTranslation('signatures')
   const [activeEventKey, setActiveEventKey] = useState(0)
   const TabItems = [t('tab.message.tab'), t('tab.file.tab'), t('tab.hash.tab')]
@@ -28,7 +28,7 @@ const SigTab = () => {
       {!useMediaQuery('(min-width: 768px)') && (
         <Accordion>
           <AccordionContent eventKey={0} title={t('tab.message.tab')}>
-            <MessageContent />
+            <MessageContent iMessageContent={iMessageContent}/>
           </AccordionContent>
           <AccordionContent eventKey={1} title={t('tab.file.tab')}>
             <FileContent />
@@ -45,7 +45,7 @@ const SigTab = () => {
           onToggle={setActiveEventKey}
         >
           <TabPanel eventKey={0}>
-            <MessageContent />
+            <MessageContent iMessageContent={iMessageContent}/>
           </TabPanel>
           <TabPanel eventKey={1}>
             <FileContent />

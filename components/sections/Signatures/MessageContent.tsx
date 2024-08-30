@@ -11,13 +11,14 @@ interface IMessageContent {
   signature: string
 }
 
-const MessageContent = () => {
+const MessageContent = ({iMessageContent}) => {
   const { t } = useTranslation('signatures')
   const methods = useForm<IMessageContent>({ mode: 'onBlur' })
   const [verusSignature, setVerusSignature] = useState<Record<
     string,
     string
   > | null>(null)
+  const [filledVerusSignature, setFilledVerusSignature] = useState(iMessageContent.filled)
   const [sigResult, setSigResult] = useState<any>()
 
   const onSubmit: SubmitHandler<IMessageContent> = async (values) => {
@@ -52,12 +53,13 @@ const MessageContent = () => {
 
   const _handleReset = () => {
     setVerusSignature(null)
+    setFilledVerusSignature(false)
     setSigResult(null)
     methods.reset()
   }
   return (
     <>
-      {!verusSignature && (
+      {!verusSignature && !filledVerusSignature && (
         <StyledFormArea>
           <FormProvider {...methods}>
             <Form SubmitHandler={methods.handleSubmit(onSubmit)}>
@@ -75,6 +77,32 @@ const MessageContent = () => {
                 name="signature"
                 label={t('formField.signature.input')}
                 validate={{ required: t('formField.signature.validate') }}
+              />
+            </Form>
+          </FormProvider>
+        </StyledFormArea>
+      )}
+      {!verusSignature && filledVerusSignature && (
+        <StyledFormArea>
+          <FormProvider {...methods}>
+            <Form SubmitHandler={methods.handleSubmit(onSubmit)}>
+              <TextArea
+                name="message"
+                label={t('tab.message.input')}
+                validate={{ required: t('tab.message.validate') }}
+                value={iMessageContent.message}
+              />
+              <Input
+                name="verusId"
+                label={t('formField.verusID.input')}
+                validate={{ required: t('formField.verusID.validate') }}
+                value={iMessageContent.verusId}
+              />
+              <Input
+                name="signature"
+                label={t('formField.signature.input')}
+                validate={{ required: t('formField.signature.validate') }}
+                value={iMessageContent.signature}
               />
             </Form>
           </FormProvider>

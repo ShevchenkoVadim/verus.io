@@ -3,11 +3,14 @@ import useTranslation from 'next-translate/useTranslation'
 import { MainLayout, Section } from '@/components/layouts'
 import { DefaultHeader } from '@/components/elements'
 import { SigTab } from '@/components/sections/Signatures'
+import { useRouter } from 'next/router'
 
-const Signatures = () => {
+const SignaturesExt = () => {
   const { t } = useTranslation('signatures')
   const title = t('seo:page.signatures.title')
   const description = t('seo:page.signatures.description')
+  const {query} = useRouter()
+  const message = JSON.parse(Buffer.from(query.data, 'base64').toString())
   return (
     <>
       <NextSeo title={title} description={description} />
@@ -18,10 +21,10 @@ const Signatures = () => {
         >
           <DefaultHeader align="center">{t('heading')}</DefaultHeader>
         </Section>
-        <SigTab iMessageContent={{ filled: false }} />
+        <SigTab iMessageContent={message}/>
       </MainLayout>
     </>
   )
 }
 
-export default Signatures
+export default SignaturesExt

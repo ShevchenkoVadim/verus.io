@@ -21,5 +21,6 @@ module.exports = {
     'rgx:/mobile': ['walletMobile'],
     'rgx:/verusid-lookup': ['verusid'],
     '/signatures': ['signatures'],
+    '/signatures/[data]': ['signatures'],
   },
 }
