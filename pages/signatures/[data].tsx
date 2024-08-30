@@ -10,10 +10,10 @@ const SignaturesExt = () => {
   const title = t('seo:page.signatures.title')
   const description = t('seo:page.signatures.description')
   const {query} = useRouter()
-  let message = {filled: false}
+  let messageData = { message: '', verusId: '', signature: '', filled: false }
   if (query) {
-    if (query.data) {
-      message = JSON.parse(Buffer.from(query.data, 'base64').toString())
+    if (typeof query.data === 'string') {
+      messageData = JSON.parse(Buffer.from(query.data, 'base64').toString())
     }
   }
   return (
@@ -26,7 +26,7 @@ const SignaturesExt = () => {
         >
           <DefaultHeader align="center">{t('heading')}</DefaultHeader>
         </Section>
-        <SigTab iMessageContent={message} />
+        <SigTab iMessageContent={messageData} />
       </MainLayout>
     </>
   )

@@ -18,7 +18,12 @@ const Signatures = () => {
         >
           <DefaultHeader align="center">{t('heading')}</DefaultHeader>
         </Section>
-        <SigTab iMessageContent={{ filled: false }} />
+        <SigTab iMessageContent={{
+          message: '',
+          verusId: '',
+          signature: '',
+          filled: false
+        }} />
       </MainLayout>
     </>
   )
