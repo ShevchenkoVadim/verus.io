@@ -5,13 +5,14 @@ import { TextArea, Input, Form } from '@/components/elements/FormFields'
 import { StyledFormArea } from './FormArea.style'
 import VerifyResult from './VerifyResult'
 
-interface IMessageContent {
+export interface IMessageContent {
   message: string
   verusId: string
   signature: string
+  filled: boolean
 }
 
-const MessageContent = ({iMessageContent}) => {
+const MessageContent = ({ iMessageContent }: { iMessageContent: IMessageContent }) => {
   const { t } = useTranslation('signatures')
   const methods = useForm<IMessageContent>({ mode: 'onBlur' })
   const [verusSignature, setVerusSignature] = useState<Record<

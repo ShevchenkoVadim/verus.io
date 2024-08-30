@@ -11,6 +11,8 @@ import {
 import MessageContent from './MessageContent'
 import HashContent from './HashContent'
 import FileContent from './FileContent'
+import { IMessageContent } from './MessageContent'
+
 
 const StyledContainer = styled.div`
   padding: ${(props) => props.theme.spaces.xs};
@@ -18,7 +20,7 @@ const StyledContainer = styled.div`
   max-width: 900px;
 `
 
-const SigTab = ({iMessageContent}) => {
+const SigTab = ({ iMessageContent }: { iMessageContent: IMessageContent }) => {
   const { t } = useTranslation('signatures')
   const [activeEventKey, setActiveEventKey] = useState(0)
   const TabItems = [t('tab.message.tab'), t('tab.file.tab'), t('tab.hash.tab')]
